@@ -1,8 +1,8 @@
-# Analisis Sentimen Review Aplikasi redBus
+# Analisis Eksploratif Data (EDA) Review Aplikasi redBus
 
 ## Deskripsi Proyek
 
-Proyek ini melakukan analisis sentimen pada review aplikasi redBus dari Google Play Store. Analisis meliputi tokenisasi, stemming, analisis frekuensi kata, dan visualisasi untuk memahami sentimen pengguna terhadap aplikasi redBus.
+Proyek ini melakukan analisis eksploratif data (EDA) yang komprehensif pada review aplikasi redBus. Analisis meliputi preprocessing teks, tokenisasi, stemming, analisis frekuensi kata, visualisasi data, analisis korelasi, word cloud, dan pembuatan laporan ringkasan untuk memahami pola dan karakteristik review pengguna terhadap aplikasi redBus.
 
 ## Dataset
 
@@ -19,7 +19,7 @@ Proyek ini melakukan analisis sentimen pada review aplikasi redBus dari Google P
 ### **Prerequisites:**
 
 ```bash
-pip install nltk PySastrawi matplotlib seaborn pandas requests beautifulsoup4 textblob
+pip install nltk PySastrawi requests beautifulsoup4 textblob wordcloud matplotlib seaborn scipy pandas numpy
 ```
 
 ### **Setup NLTK:**
@@ -27,7 +27,7 @@ pip install nltk PySastrawi matplotlib seaborn pandas requests beautifulsoup4 te
 ```python
 import nltk
 nltk.download('punkt')
-nltk.download('punkt_tab')
+nltk.download('stopwords')
 ```
 
 ### **Menjalankan Notebook:**
@@ -39,125 +39,137 @@ nltk.download('punkt_tab')
 
 ## Metodologi
 
-### 1. Preprocessing
+### 1. Data Preprocessing
 
+- **Case Folding**: Mengubah teks ke lowercase
+- **Pembersihan Tanda Baca**: Menghilangkan karakter non-alfanumerik
 - **Tokenisasi**: Menggunakan NLTK `word_tokenize` untuk memecah teks menjadi token
-- **Stemming**: Menggunakan PySastrawi untuk stemming bahasa Indonesia
-- **Analisis Frekuensi**: Menghitung frekuensi kemunculan kata
+- **Stopwords Removal**: Menghilangkan kata-kata umum yang tidak informatif
+- **Stemming**: Menggunakan PorterStemmer untuk mencari kata dasar
 
-### 2. Tools yang Digunakan
+### 2. Exploratory Data Analysis (EDA)
 
-- `nltk`: Untuk tokenisasi teks
-- `PySastrawi`: Untuk stemming bahasa Indonesia
-- `pandas`: Untuk manipulasi data
-- `matplotlib` & `seaborn`: Untuk visualisasi
+- **Analisis Kualitas Data**: Missing values, duplikasi, konsistensi
+- **Statistik Deskriptif**: Mean, median, distribusi data
+- **Analisis Korelasi**: Hubungan antar variabel numerik
+- **Visualisasi Data**: Distribusi rating, sentimen, panjang review
+- **Word Cloud Analysis**: Visualisasi kata kunci berdasarkan sentimen
+- **Analisis Frekuensi**: Top 100 kata paling sering muncul
+
+### 3. Tools yang Digunakan
+
+- `nltk`: Untuk tokenisasi teks dan stopwords
+- `pandas` & `numpy`: Untuk manipulasi dan analisis data
+- `matplotlib` & `seaborn`: Untuk visualisasi data
+- `wordcloud`: Untuk pembuatan word cloud
 - `collections.Counter`: Untuk analisis frekuensi kata
-- `requests` & `beautifulsoup4`: Untuk web scraping (edukasi)
-- `textblob`: Untuk analisis sentimen otomatis (opsional)
+- `scipy`: Untuk analisis statistik lanjutan
 
 ## Fitur Notebook
 
-### **Cell 1 - Analisis Data Review:**
+### **Cell 1-2 - Instalasi dan Import Libraries:**
 
-- Memuat data review redBus dari Google Play Store
-- Tokenisasi dan stemming menggunakan NLTK dan PySastrawi
-- Analisis frekuensi kata dan kata kunci
-- Kategorisasi sentimen berdasarkan rating
+- Instalasi packages yang diperlukan (nltk, PySastrawi, wordcloud, dll.)
+- Import semua library untuk manipulasi data, visualisasi, dan NLP
+- Konfigurasi NLTK dan pengaturan plot
 
-### **Cell 2 - Laporan Analisis:**
+### **Cell 3-4 - Pemuatan Data:**
 
-- Generate laporan analisis komprehensif
-- Analisis detail setiap review
-- Identifikasi masalah umum dan aspek positif
-- Rekomendasi untuk perbaikan aplikasi
+- Memuat dataset review redBus dengan 5 sample review
+- Konversi data ke DataFrame pandas
+- Preview data yang dimuat
 
-### **Cell 3 - Visualisasi dan Statistik:**
+### **Cell 5-6 - EDA pada Data Mentah:**
 
-- 4 grafik visualisasi (distribusi rating, sentimen, panjang review, kata kunci)
-- Statistik tambahan (rata-rata, median, standar deviasi)
-- Analisis emosi dan topik
-- Analisis panjang review berdasarkan rating
+- Analisis informasi dasar dataset
+- Statistik deskriptif untuk data numerik
+- Analisis kualitas data (missing values, duplikasi)
+- Visualisasi distribusi rating dan panjang review
 
-### **Cell 4 - Fungsi Lanjutan:**
+### **Cell 7-8 - Data Preprocessing:**
 
-- Fungsi web scraping (edukasi) untuk Google Play Store
-- Rekomendasi tools analisis sentimen lanjutan
-- Implementasi TextBlob untuk analisis otomatis
-- Panduan untuk analisis lebih mendalam
+- Case folding (lowercase conversion)
+- Pembersihan tanda baca
+- Tokenisasi menggunakan NLTK
+- Penghapusan stopwords
+- Stemming menggunakan PorterStemmer
+
+### **Cell 9-10 - EDA pada Data Bersih:**
+
+- Analisis frekuensi 100 kata teratas
+- Visualisasi kata paling umum
+- Pembuatan word cloud dari data bersih
+
+### **Cell 11-12 - Analisis Statistik dan Kualitas Data:**
+
+- Statistik deskriptif lengkap
+- Analisis distribusi rating dan sentimen
+- Analisis missing values dan duplikasi
+- Analisis konsistensi rating vs sentimen
+
+### **Cell 13-14 - Visualisasi Eksploratif:**
+
+- 4 grafik visualisasi (distribusi rating, sentimen, panjang review, box plot)
+- Analisis korelasi antar variabel
+- Heatmap korelasi
+
+### **Cell 15-16 - Analisis Teks Lanjutan:**
+
+- Word cloud untuk semua review, positif, dan negatif
+- Analisis frekuensi kata kunci positif dan negatif
+- Perbandingan kata kunci berdasarkan sentimen
+
+### **Cell 17-18 - Pembuatan Laporan:**
+
+- Fungsi untuk generate laporan ringkasan EDA
+- Penyimpanan laporan ke file markdown
+- Rekomendasi berdasarkan temuan analisis
 
 ## Hasil Analisis
 
-### Review 1 (Rating: 3/5 - Sentimen Campuran)
+### Dataset Overview
 
-**Review Asli:**
+Notebook ini menggunakan dataset sample dengan **5 review** redBus yang mencakup berbagai rating dan sentimen:
 
-> "Our first trip was very good, and the booking went smooth. However, when I'm trying to use my 'referral code' in my friends' devices, it's just not working, showing 'something seems to be wrong'. I tried to use the 'chat with us' in the app, but the 'Help' section is not even opening, showing some webpage error. Please fix it soon."
+- **Review 1**: Rating 3/5 - Sentimen Campuran
+- **Review 2**: Rating 1/5 - Sentimen Negatif
+- **Review 3**: Rating 1/5 - Sentimen Negatif
+- **Review 4**: Rating 5/5 - Sentimen Positif
+- **Review 5**: Rating 4/5 - Sentimen Positif
 
-**Analisis:**
+### Analisis Preprocessing
 
-- **Jumlah Token**: 47 token
-- **Token Unik**: 42 token
-- **Token setelah Stemming**: 47 token
-- **File Output**: `redbus_review_1.txt`
+**Proses Pembersihan Teks:**
 
-**Pembahasan**: Review ini menunjukkan pengalaman campuran - positif untuk booking dan perjalanan, namun negatif untuk fitur referral dan bantuan. Pengguna mengalami masalah teknis dengan kode referral dan fitur help yang tidak berfungsi.
+1. **Case Folding**: Semua teks diubah ke lowercase
+2. **Pembersihan Tanda Baca**: Karakter non-alfanumerik dihilangkan
+3. **Tokenisasi**: Teks dipecah menjadi token menggunakan NLTK
+4. **Stopwords Removal**: Kata-kata umum dihilangkan
+5. **Stemming**: Kata-kata diubah ke bentuk dasar menggunakan PorterStemmer
 
-### Review 2 (Rating: 1/5 - Sentimen Negatif)
+**Hasil Preprocessing:**
 
-**Review Asli:**
-
-> "I had a medical emergency so not able to travel and tried for cancellation but directly redbus informed that I can't cancel my ticket and even I tried to reschedule as I have to travel in coming days but then also it's not possible. I don't understand if you can't provide any of this options then what services you provide and it's not at all expected. My experience is very worst and has occurred loss of 2500."
-
-**Analisis:**
-
-- **Jumlah Token**: 66 token
-- **Token Unik**: 52 token
-- **Token setelah Stemming**: 66 token
-- **File Output**: `redbus_review_2.txt`
-
-**Pembahasan**: Review ini sangat negatif karena kebijakan pembatalan yang kaku. Pengguna mengalami situasi darurat medis namun tidak bisa membatalkan atau menjadwal ulang tiket, menyebabkan kerugian finansial.
-
-### Review 3 (Rating: 1/5 - Sentimen Negatif)
-
-**Review Asli:**
-
-> "very bad algorithm, I went upto the payment procedure but due to technical issues the payment failed. next time the payment increase, I totally shocked. 2nd time also I checked the price after closing the app, again the price increase. very bad experience so I did not book the ticket. now I am going to uninstall the app. i know this will not impact you. but I don't want your app on my phone. so ta ta bye bye"
-
-**Analisis:**
-
-- **Jumlah Token**: 66 token
-- **Token Unik**: 50 token
-- **Token setelah Stemming**: 66 token
-- **File Output**: `redbus_review_3.txt`
-
-**Pembahasan**: Review ini mengeluhkan algoritma dynamic pricing yang tidak konsisten. Pengguna mengalami kenaikan harga yang tidak wajar setelah gagal pembayaran, menyebabkan frustrasi dan keputusan untuk uninstall aplikasi.
+- Dataset bersih siap untuk analisis frekuensi dan visualisasi
+- Token yang sudah distemming untuk analisis kata kunci
+- Perbandingan data sebelum dan sesudah preprocessing
 
 ## Analisis Frekuensi Kata
 
-**15 Kata Teratas dari Review redBus:**
+**Top 100 Kata Paling Sering Muncul:**
 
-1. `the` (12 kali) - Artikel bahasa Inggris
-2. `and` (8 kali) - Konjungsi
-3. `very` (6 kali) - Adverb intensifier
-4. `app` (5 kali) - Aplikasi
-5. `bad` (5 kali) - Kata sifat negatif
-6. `not` (5 kali) - Negasi
-7. `good` (4 kali) - Kata sifat positif
-8. `booking` (4 kali) - Proses pemesanan
-9. `payment` (4 kali) - Pembayaran
-10. `ticket` (4 kali) - Tiket
-11. `experience` (3 kali) - Pengalaman
-12. `help` (3 kali) - Bantuan
-13. `price` (3 kali) - Harga
-14. `smooth` (3 kali) - Lancar
-15. `increase` (3 kali) - Meningkat
+Notebook ini menganalisis frekuensi 100 kata teratas dari dataset yang sudah dibersihkan. Analisis ini mencakup:
 
-**Pembahasan Frekuensi:**
+- **Kata Kunci Positif**: Kata-kata yang sering muncul dalam review positif
+- **Kata Kunci Negatif**: Kata-kata yang sering muncul dalam review negatif
+- **Word Cloud**: Visualisasi kata kunci berdasarkan sentimen
+- **Analisis Frekuensi**: Top 20 kata paling umum dengan visualisasi bar chart
 
-- Kata "very" dan "bad" sering muncul, menunjukkan intensitas keluhan pengguna
-- Istilah teknis seperti "app", "booking", "payment" mendominasi
-- Kata "good" dan "smooth" menunjukkan aspek positif yang dihargai pengguna
-- Kata "price" dan "increase" menunjukkan fokus pada masalah pricing
+**Fitur Analisis Frekuensi:**
+
+1. **Counter Analysis**: Menggunakan `collections.Counter` untuk menghitung frekuensi
+2. **Visualisasi Bar Chart**: Top 20 kata dengan seaborn
+3. **Word Cloud Generation**: Visualisasi kata kunci yang menarik
+4. **Sentiment-based Analysis**: Pemisahan kata kunci berdasarkan sentimen
 
 ## Temuan Penting
 
@@ -206,27 +218,32 @@ nltk.download('punkt_tab')
 
 Proyek ini menghasilkan beberapa file output:
 
-- `redbus_review_1.txt`: Token dari review 1
-- `redbus_review_2.txt`: Token dari review 2
-- `redbus_review_3.txt`: Token dari review 3
-- `redbus_analysis_results.md`: Hasil analisis terstruktur lengkap
+- `eda_summary_report.md`: Laporan ringkasan EDA yang dihasilkan otomatis
 - `README.md`: Dokumentasi lengkap proyek
+- File-file hasil analisis sebelumnya (jika ada):
+  - `redbus_analysis_results.md`: Hasil analisis terstruktur lengkap
+  - `redbus_review_1.txt`: Token dari review 1
+  - `redbus_review_2.txt`: Token dari review 2
+  - `redbus_review_3.txt`: Token dari review 3
 
 ## Visualisasi dan Statistik
 
 ### Grafik yang Dihasilkan:
 
-1. **Distribusi Rating**: Bar chart menunjukkan distribusi rating 1-5
-2. **Distribusi Sentimen**: Pie chart untuk sentimen positif, negatif, dan campuran
-3. **Panjang Review**: Box plot panjang review berdasarkan rating
-4. **Kata Kunci**: Bar chart kata kunci positif vs negatif
+1. **Distribusi Rating**: Bar chart dengan palette 'husl' menunjukkan distribusi rating
+2. **Distribusi Sentimen**: Pie chart dengan warna custom untuk sentimen positif, negatif, dan campuran
+3. **Distribusi Panjang Review**: Histogram dengan KDE untuk panjang review dalam karakter
+4. **Box Plot Rating vs Panjang Review**: Analisis hubungan rating dengan panjang review
+5. **Heatmap Korelasi**: Matriks korelasi antar variabel numerik
+6. **Word Cloud**: 3 word cloud (semua review, positif, negatif)
+7. **Top 20 Kata**: Bar chart kata paling sering muncul
 
-### Statistik Tambahan:
+### Statistik Deskriptif:
 
-- Rata-rata rating: 2.4/5
-- Review positif (4-5): 2 review
-- Review negatif (1-2): 2 review
-- Review campuran (3): 1 review
+- **Informasi Dataset**: Info lengkap tentang struktur data
+- **Statistik Numerik**: Mean, median, std dev untuk kolom numerik
+- **Analisis Kualitas Data**: Missing values, duplikasi, konsistensi
+- **Distribusi Rating dan Sentimen**: Count dan persentase
 
 ## Kesimpulan
 
@@ -273,8 +290,9 @@ Analisis review aplikasi redBus menunjukkan bahwa meskipun aplikasi memiliki rat
 
 ```
 1a/
-├── scripts.ipynb                    # Notebook utama dengan analisis review redBus
+├── scripts.ipynb                    # Notebook utama dengan EDA komprehensif
 ├── README.md                        # Dokumentasi proyek (file ini)
+├── eda_summary_report.md           # Laporan ringkasan EDA (generated)
 ├── redbus_analysis_results.md       # Laporan analisis lengkap (generated)
 ├── redbus_review_1.txt             # Token dari review 1 (generated)
 ├── redbus_review_2.txt             # Token dari review 2 (generated)
